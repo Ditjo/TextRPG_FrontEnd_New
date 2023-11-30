@@ -3,10 +3,15 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule} from '@angular/common/http';
+
 import { CharacterCreatorComponent } from './components/character-creator/character-creator.component';
 import { CharacterSelectorComponent } from './components/character-selector/character-selector.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { OptionsComponent } from './components/options/options.component';
+import { MainGameComponent } from './components/main-game/main-game.component';
+import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
+import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 @NgModule({
   declarations: [
@@ -14,11 +19,15 @@ import { OptionsComponent } from './components/options/options.component';
     CharacterCreatorComponent,
     CharacterSelectorComponent,
     MainMenuComponent,
-    OptionsComponent
+    OptionsComponent,
+    MainGameComponent,
+    AdminPanelComponent,
+    TutorialComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
