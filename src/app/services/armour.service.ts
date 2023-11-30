@@ -1,14 +1,15 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../environment/environment';
+import { httpOptions } from '../environment/httpOptions'
 import { Observable } from 'rxjs';
 import { Armour } from '../models/armour';
 
-const httpOptions={
-  headers: new HttpHeaders({
-    'content-type' : 'application/json'
-  })
-}
+// const httpOptions={
+//   headers: new HttpHeaders({
+//     'content-type' : 'application/json'
+//   })
+// }
 
 @Injectable({
   providedIn: 'root'
