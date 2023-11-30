@@ -9,14 +9,15 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 
 const routes: Routes = [
+  {path:'', component: MainMenuComponent},
   {path:'main-menu', component: MainMenuComponent},
   {path:'character-creator', component: CharacterCreatorComponent},
   {path:'charactor-selector', component: CharacterSelectorComponent},
   {path:'options', component: OptionsComponent},
   {path:'main-game', component: MainGameComponent},
   {path:'admin-panel', component: AdminPanelComponent},
-  {path:'tutorial', component: TutorialComponent},
-  {path:'', redirectTo: 'mainmenu', pathMatch:'full'},
+  {path:'tutorial', component: TutorialComponent}
+  // {path:'', redirectTo: 'mainmenu', pathMatch:'full'},
 ];
 
 @NgModule({
