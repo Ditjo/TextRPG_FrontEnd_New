@@ -12,6 +12,8 @@ import { OptionsComponent } from './components/options/options.component';
 import { MainGameComponent } from './components/main-game/main-game.component';
 import { AdminPanelComponent } from './components/admin-panel/admin-panel.component';
 import { TutorialComponent } from './components/tutorial/tutorial.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { TutorialComponent } from './components/tutorial/tutorial.component';
     OptionsComponent,
     MainGameComponent,
     AdminPanelComponent,
-    TutorialComponent
+    TutorialComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
