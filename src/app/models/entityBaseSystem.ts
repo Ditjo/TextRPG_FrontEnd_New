@@ -1,4 +1,5 @@
-export interface EntityBaseSystem{
+export interface EntityBaseSystem
+{
     id:number;
     strength:number;
     agility:number;

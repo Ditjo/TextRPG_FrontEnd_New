@@ -1,6 +1,7 @@
 import { PotionType } from "./potionType";
 
-export interface Potion{
+export interface Potion
+{
     id: number;
     inventoryId: number;
     potionId: number;

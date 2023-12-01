@@ -1,4 +1,5 @@
-export interface Career{
+export interface Career
+{
     id:number;
     careerType:string | null;
 }

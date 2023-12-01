@@ -1,6 +1,7 @@
 import { SkillRollType } from "./skillRollType";
 
-export interface WeaponType{
+export interface WeaponType
+{
     id: number;
     weaponTypeName: string | null;
     skillRollTypeId: number;

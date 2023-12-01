@@ -2,7 +2,8 @@ import { Armour } from "./armour";
 import { Potion } from "./potion";
 import { Weapon } from "./weapon";
 
-export interface Inventory{
+export interface Inventory
+{
     id: number;
     gold: number;
     armourId: number;

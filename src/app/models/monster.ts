@@ -1,7 +1,8 @@
 import { EntityBaseSystem } from "./entityBaseSystem";
 import { Inventory } from "./inventory";
 
-export interface Monster{
+export interface Monster
+{
     id: number;
     monsterName: string | null;
     monsterXp: number;

@@ -1,4 +1,5 @@
-export interface SkillRollType{
+export interface SkillRollType
+{
     id: number;
     skillType: string | number;
 }

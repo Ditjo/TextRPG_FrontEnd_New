@@ -3,7 +3,8 @@ import { EntityBaseSystem } from "./entityBaseSystem";
 import { Inventory } from "./inventory";
 import { Race } from "./race";
 
-export interface Hero{
+export interface Hero
+{
     id: number;
     heroName: string | null;
     heroXp: number;

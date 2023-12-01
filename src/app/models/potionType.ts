@@ -1,4 +1,5 @@
-export interface PotionType{
+export interface PotionType
+{
     id: number;
     potionTypeNUmber: string | null;
     potionDice: number;

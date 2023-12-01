@@ -1,7 +1,8 @@
 import { Inventory } from "./inventory";
 import { WeaponType } from "./weaponType";
 
-export interface Weapon{
+export interface Weapon
+{
     id: number;
     weaponTypeId: number;
     weaponName: string | null;
