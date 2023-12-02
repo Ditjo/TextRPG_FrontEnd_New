@@ -1,9 +1,10 @@
+import { baseId } from "./baseId";
 import { Inventory } from "./inventory";
 import { WeaponType } from "./weaponType";
 
-export interface Weapon
+export interface Weapon extends baseId
 {
-    id: number;
+    // id: number;
     weaponTypeId: number;
     weaponName: string | null;
     weaponDamageModifier: number;

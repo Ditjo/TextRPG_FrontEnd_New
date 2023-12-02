@@ -5,6 +5,7 @@ import { HeroService } from '../../services/hero.service';
 import { Hero } from '../../models/hero';
 import { GenericService } from '../../services/generic.service';
 import { HttpClient } from '@angular/common/http';
+import { TableURL } from '../../tools/table-url'
 
 @Component({
   selector: 'app-admin-panel',
@@ -25,7 +26,7 @@ export class AdminPanelComponent
   herolist:Hero[] = []
   
   GetAllArmour(){
-    this.armourService.getAll('Armour').subscribe(
+    this.armourService.getAll(TableURL.Armour).subscribe(
       (data) =>{
         this.armourlist = data;
         console.log(this.armourlist);
@@ -34,7 +35,7 @@ export class AdminPanelComponent
   }
   
   GetAllHeros(){
-    this.heroService.getAll('Hero').subscribe(
+    this.heroService.getAll(TableURL.Hero).subscribe(
       (data) =>{
         this.herolist = data;
         console.log(this.herolist);

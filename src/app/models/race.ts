@@ -1,5 +1,7 @@
-export interface Race
+import { baseId } from "./baseId";
+
+export interface Race extends baseId
 {
-    id: number;
+    // id: number;
     raceType: string | null;
 }

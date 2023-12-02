@@ -1,6 +1,8 @@
-export interface PotionType
+import { baseId } from "./baseId";
+
+export interface PotionType extends baseId
 {
-    id: number;
+    // id: number;
     potionTypeNUmber: string | null;
     potionDice: number;
     availableToHero: boolean;

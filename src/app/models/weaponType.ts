@@ -1,8 +1,9 @@
+import { baseId } from "./baseId";
 import { SkillRollType } from "./skillRollType";
 
-export interface WeaponType
+export interface WeaponType extends baseId
 {
-    id: number;
+    // id: number;
     weaponTypeName: string | null;
     skillRollTypeId: number;
     energyCost: number;

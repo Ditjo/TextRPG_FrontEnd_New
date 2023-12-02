@@ -1,5 +1,7 @@
-export interface Career
+import { baseId } from "./baseId";
+
+export interface Career extends baseId
 {
-    id:number;
+    // id:number;
     careerType:string | null;
 }

@@ -1,5 +1,7 @@
-export interface SkillRollType
+import { baseId } from "./baseId";
+
+export interface SkillRollType extends baseId
 {
-    id: number;
+    // id: number;
     skillType: string | number;
 }

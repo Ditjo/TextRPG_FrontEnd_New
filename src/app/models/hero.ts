@@ -1,11 +1,12 @@
+import { baseId } from "./baseId";
 import { Career } from "./career";
 import { EntityBaseSystem } from "./entityBaseSystem";
 import { Inventory } from "./inventory";
 import { Race } from "./race";
 
-export interface Hero
+export interface Hero extends baseId
 {
-    id: number;
+    // id: number;
     heroName: string | null;
     heroXp: number;
     level: number;

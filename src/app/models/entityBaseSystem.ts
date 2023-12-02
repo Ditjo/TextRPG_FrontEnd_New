@@ -1,6 +1,8 @@
-export interface EntityBaseSystem
+import { baseId } from "./baseId";
+
+export interface EntityBaseSystem extends baseId
 {
-    id:number;
+    // id:number;
     strength:number;
     agility:number;
     vigor:number;
