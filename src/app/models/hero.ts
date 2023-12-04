@@ -14,7 +14,7 @@ export interface Hero extends baseId
     careerId: number;
     note: string | null;
 
-    ebs: EntityBaseSystem;
+    entityBaseSystem: EntityBaseSystem;
     inventory: Inventory;
     race: Race | null;
     career: Career | null;

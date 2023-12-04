@@ -1,13 +1,114 @@
-<div>
+<div class="flex-container">
     <div>
         <ul>
             <li *ngFor="let hero of herolist">
-                <p>Name: {{hero.heroName}}</p>
-                <p>Race: {{hero.race?.raceType}}</p>
-                <p>Career: {{hero.career?.careerType}}</p>
-                <p>Level: {{hero.level}}</p>
+                <button (click)="SelectHero(hero)">
+                    <table>
+                        <tr>
+                            <th>Name: </th>
+                            <td>{{hero.heroName}}</td>
+                            <th>Race: </th>
+                            <td>{{hero.race?.raceType}}</td>
+                        </tr>
+                        <tr>
+                            <th>Level: </th>
+                            <td>{{hero.level}}</td>
+                            <th>Career: </th>
+                            <td>{{hero.level}}</td>
+                        </tr>
+                    </table>
+                </button>
             </li>
         </ul>
+    </div>
+    <div class="flex-container" *ngIf="selectedhero != null">
+        <div>
+            <div>
+                Info
+                <Table>
+                    <tr>
+                        <th>Name: </th>
+                        <td>{{selectedhero.heroName}}</td>
+                    </tr>
+                    <tr>
+                        <th>Race: </th>
+                        <td>{{selectedhero.race?.raceType}}</td>
+                    </tr>
+                    <tr>
+                        <th>Career: </th>
+                        <td>{{selectedhero.level}}</td>
+                    </tr>
+                    <tr>
+                        <th>Level: </th>
+                        <td>{{selectedhero.level}}</td>
+                    </tr>
+                    <tr>
+                        <th>XP: </th>
+                        <td>{{selectedhero.heroXp}}</td>
+                    </tr>
+                    <tr>
+                        <th>Gold: </th>
+                        <td>{{selectedhero.inventory.gold}}</td>
+                    </tr>
+                    <tr>
+                        <th>Note: </th>
+                        <td>{{selectedhero.note}}</td>
+                    </tr>
+                </Table>
+            </div>
+            <div>
+                Items
+                <table>
+                    <tr>
+                        <th>Armour:</th>
+                        <ul>
+                            <li>{{selectedhero.inventory.armour?.armourTypeName}}</li>
+                        </ul>
+                    </tr>
+                    <tr>
+                        <th>Weapons:</th>
+                        <ul *ngFor="let weapon of selectedhero.inventory.weapons">
+                            <li>{{weapon.weaponName}}</li>
+                        </ul>
+                    </tr>
+                    <tr>
+                        <th>Potions:</th>
+                        <ul *ngFor="let potion of selectedhero.inventory.potions">
+                            <li>{{potion.potionType?.potionTypeName}}: {{potion.amount}}</li>
+                        </ul>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            Stats
+            <Table>
+                <tr>
+                    <th>Strength: </th>
+                    <td>{{selectedhero.entityBaseSystem.strength}}</td>
+                </tr>
+                <tr>
+                    <th>Agility: </th>
+                    <td>{{selectedhero.entityBaseSystem.agility}}</td>
+                </tr>
+                <tr>
+                    <th>Vigor: </th>
+                    <td>{{selectedhero.entityBaseSystem.vigor}}</td>
+                </tr>
+                <tr>
+                    <th>Spirit: </th>
+                    <td>{{selectedhero.entityBaseSystem.spirit}}</td>
+                </tr>
+                <tr>
+                    <th>Health: </th>
+                    <td>{{selectedhero.entityBaseSystem.health}}</td>
+                </tr>
+                <tr>
+                    <th>Energy: </th>
+                    <td>{{selectedhero.entityBaseSystem.energy}}</td>
+                </tr>
+            </Table>
+        </div>
     </div>
 </div>
 
