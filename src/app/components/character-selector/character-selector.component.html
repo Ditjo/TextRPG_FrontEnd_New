@@ -1,4 +1,20 @@
-<p>character-selector works!</p>
+<div>
+    <div>
+        <ul>
+            <li *ngFor="let hero of herolist">
+                <p>Name: {{hero.heroName}}</p>
+                <p>Race: {{hero.race?.raceType}}</p>
+                <p>Career: {{hero.career?.careerType}}</p>
+                <p>Level: {{hero.level}}</p>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div>
+    <button (click)="GetAllHeros()">Get All Hero</button>
+</div>
 
 <a routerLink="/main-menu">Back</a>
 <br>

@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Hero } from '../../models/hero';
+import { GenericService } from '../../services/generic.service';
+import { TableURL } from '../../tools/table-url';
 
 @Component({
   selector: 'app-character-selector',
@@ -7,4 +10,22 @@ import { Component } from '@angular/core';
 })
 export class CharacterSelectorComponent {
 
+  constructor(private heroService:GenericService<Hero>){
+
+  }
+
+  herolist:Hero[] = []
+
+  ngOninit(){
+    this.GetAllHeros()
+  }
+
+  GetAllHeros(){
+    this.heroService.getAll(TableURL.Hero).subscribe(
+      (data) =>{
+        this.herolist = data;
+        console.log(this.herolist);
+      }
+    )
+  }
 }
