@@ -16,11 +16,14 @@ export class CharacterSelectorComponent {
 
   herolist:Hero[] = []
 
-  ngOninit(){
+  ngOnInit(){
     this.GetAllHeros()
+    // console.log("I'm in ngOnInit");
+    
   }
 
   GetAllHeros(){
+    // console.log("I'm in GettAllHeros");
     this.heroService.getAll(TableURL.Hero).subscribe(
       (data) =>{
         this.herolist = data;
