@@ -8,5 +8,5 @@ export interface Potion extends baseId
     potionId: number;
     amount: number;
 
-    potionType: PotionType[] | null;
+    potionType: PotionType | null;
 }

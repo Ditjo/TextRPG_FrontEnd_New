@@ -9,7 +9,7 @@ export interface Inventory extends baseId
     gold: number;
     armourId: number;
 
-    weapon: Weapon[] | null;
+    weapons: Weapon[] | null;
     armour: Armour | null;
-    potion: Potion[] | null;
+    potions: Potion[] | null;
 }

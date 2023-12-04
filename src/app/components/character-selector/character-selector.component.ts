@@ -15,6 +15,8 @@ export class CharacterSelectorComponent {
   }
 
   herolist:Hero[] = []
+  selectedhero!:Hero;
+
 
   ngOnInit(){
     this.GetAllHeros()
@@ -30,5 +32,11 @@ export class CharacterSelectorComponent {
         console.log(this.herolist);
       }
     )
+  }
+
+  SelectHero(hero:Hero){
+    this.selectedhero = hero;
+    console.log(this.selectedhero);
+    
   }
 }
