@@ -6,32 +6,18 @@
 }
 
 .menuview{
+    position: center;
+    /* padding: 40%; */
     align-items: center;
 }
 
-/* body{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    overflow: hidden;
-    background: #dcd9dc;
-    
-} */
-
-/* ul{
-    margin: auto;
-    width: 50%;
-    height: 50%; */
-    /* position:relative; */
-/* } */
 ul li {
     list-style: none;
     text-align: center;
 }
 
 ul li a {
-    color: #333;
+    color: #0006;
     text-decoration: none;
     font-size: 3em;
     padding: 5px 20px;
@@ -41,10 +27,10 @@ ul li a {
 }
 
 ul:hover li a {
-    color: #0002;
+    color: #0006;
   }
   ul li:hover a {
-    color: #000;
+    color: #0c0;
     background: transparent;
   }
 

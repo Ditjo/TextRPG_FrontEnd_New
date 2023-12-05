@@ -14,6 +14,7 @@ import { AdminPanelComponent } from './components/admin-panel/admin-panel.compon
 import { TutorialComponent } from './components/tutorial/tutorial.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { NavBarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { FooterComponent } from './components/footer/footer.component';
     AdminPanelComponent,
     TutorialComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
