@@ -8,6 +8,15 @@ import { Hero } from '../../models/hero';
 import { Weapon } from '../../models/weapon';
 import { EntityBaseSystem } from '../../models/entityBaseSystem';
 import { DiceRollInterval } from '../../tools/diceroller';
+import { FormControl, FormGroup } from '@angular/forms';
+import { GenericService } from '../../services/generic.service';
+import { Race } from '../../models/race';
+import { TableURL } from '../../tools/table-url';
+import { Career } from '../../models/career';
+import { Hero } from '../../models/hero';
+import { Weapon } from '../../models/weapon';
+import { EntityBaseSystem } from '../../models/entityBaseSystem';
+import { DiceRollInterval } from '../../tools/diceroller';
 
 @Component({
   selector: 'app-character-creator',
@@ -110,16 +119,16 @@ export class CharacterCreatorComponent {
       heroName: this.createNewHero.value.heroName!,
       note: this.createNewHero.value.note!,
       raceId: this.createNewHero.value.race?.id!,
-      race: null,
+      race: this.createNewHero.value.race!,
       careerId: this.createNewHero.value.career?.id!,
-      career: null,
+      career: this.createNewHero.value.career!,
       heroXp: 0,
       level: 1,
       entityBaseSystem: this.newEntityBaseSystem,
       inventory: {
         id: 0,
         gold: 0,
-        armourId: null,
+        armourId: 0,
         armour: null,
         potions: null,
         weapons: [this.createNewHero.value.weapon!]
