@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TextRPG_FrontEnd';
+
+  ngOnInit(){
+    localStorage.setItem('LogOn','0')
   }
+  }
+
+
+
+// globalbool:boolean = true
