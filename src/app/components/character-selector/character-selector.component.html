@@ -1,26 +1,10 @@
 <div class="nav">
     <app-navbar [showNavbar]="true"></app-navbar>
 </div>
-<div>
+<div class="flex-container">
     <div>
         <ul>
             <li *ngFor="let hero of herolist">
-                <button (click)="SelectHero(hero)">
-                    <table>
-                        <tr>
-                            <th>Name: </th>
-                            <td>{{hero.heroName}}</td>
-                            <th>Race: </th>
-                            <td>{{hero.race?.raceType}}</td>
-                        </tr>
-                        <tr>
-                            <th>Level: </th>
-                            <td>{{hero.level}}</td>
-                            <th>Career: </th>
-                            <td>{{hero.level}}</td>
-                        </tr>
-                    </table>
-                </button>
                 <button (click)="SelectHero(hero)">
                     <table>
                         <tr>
