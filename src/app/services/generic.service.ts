@@ -1,9 +1,11 @@
 import { Observable } from 'rxjs';
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { httpOptions } from '../environment/httpOptions';
 import { environment } from '../environment/environment';
 import { baseId } from '../models/baseId';
+import { Type } from '@angular/compiler';
+import { TableURL } from '../tools/table-url';
 
 @Injectable({
   providedIn: 'root'
@@ -28,9 +30,15 @@ export class GenericService<T>
     return this.http.get<T>(`${this.apiUrl}${url}/${id}`);
   }
 
+  // httpOptionsLocal={
+  //   headers: new HttpHeaders({
+  //     'content-type' : 'application/json'
+  //   })
+  // }
+
   create(url:string, item: T): Observable<void>
   {
-    return this.http.post<void>(`${this.apiUrl}${url}`, item, httpOptions);
+    return this.http.post<void>(this.apiUrl + url, item, httpOptions);
   }
 
   update(url:string, item: T): Observable<void>
