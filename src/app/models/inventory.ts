@@ -7,7 +7,7 @@ export interface Inventory extends baseId
 {
     // id: number;
     gold: number;
-    armourId: number;
+    armourId: number | null;
 
     weapons: Weapon[] | null;
     armour: Armour | null;
