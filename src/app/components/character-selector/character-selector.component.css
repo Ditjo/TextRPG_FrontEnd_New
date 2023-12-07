@@ -6,10 +6,10 @@
 }
 
 .view{
+    height: 100%;
     display: flex;
     justify-content: center;
-    /* align-items: center; */
-    
+    align-items: center;
     flex-direction: column;
 }
 
@@ -19,7 +19,19 @@
     border-radius: 10px;
     padding: 10px;
     margin: 5px 10px;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
 }
+.buttons:hover{
+    filter: brightness(80%);
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
 ul{
     border: 1px solid black;
     list-style-type: none;
