@@ -5,7 +5,6 @@ import { Weapon } from "./weapon";
 
 export interface Inventory extends baseId
 {
-    // id: number;
     gold: number;
     armourId: number | null;
 

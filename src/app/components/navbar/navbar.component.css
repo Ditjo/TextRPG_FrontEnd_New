@@ -38,7 +38,14 @@ li button:hover
 .switch-account
 {
     margin-left: auto;
-    height: 40px;
+}
+
+.account-state
+{
+    color: #edd;
+    padding-top: 9px;
+    margin-left: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .content-container
