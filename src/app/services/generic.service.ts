@@ -27,7 +27,7 @@ export class GenericService<T>
 
   getById(url:string, id: number): Observable<T>
   {
-    return this.http.get<T>(`${this.apiUrl}${url}/${id}`);
+    return this.http.get<T>(`${this.apiUrl}${url}${id}`);
   }
 
   // httpOptionsLocal={
@@ -36,18 +36,18 @@ export class GenericService<T>
   //   })
   // }
 
-  create(url:string, item: T): Observable<void>
+  create(url:string, item: T): Observable<T>
   {
-    return this.http.post<void>(this.apiUrl + url, item, httpOptions);
+    return this.http.post<T>(this.apiUrl + url, item, httpOptions);
   }
 
   update(url:string, item: T): Observable<void>
   {
-    return this.http.put<void>(`${this.apiUrl}${url}/${(item as baseId).id}`, item, httpOptions);
+    return this.http.put<void>(`${this.apiUrl}${url}${(item as baseId).id}`, item, httpOptions);
   }
 
   delete(url:string, id: number): Observable<void>
   {
-    return this.http.delete<void>(`${this.apiUrl}${url}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}${url}${id}`);
   }
 }
