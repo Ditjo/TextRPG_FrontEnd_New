@@ -10,6 +10,8 @@ import { EntityBaseSystem } from '../../models/entityBaseSystem';
 import { DiceRollInterval } from '../../tools/diceroller';
 import { Router } from '@angular/router';
 import { firstValueFrom, timeout } from 'rxjs';
+import { Router } from '@angular/router';
+import { firstValueFrom, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-character-creator',
@@ -19,6 +21,7 @@ import { firstValueFrom, timeout } from 'rxjs';
 export class CharacterCreatorComponent {
   constructor(
     private router: Router,
+    private router: Router,
     private raceService:GenericService<Race>,
     private careerService:GenericService<Career>,
     private weaponService:GenericService<Weapon>,
@@ -26,8 +29,10 @@ export class CharacterCreatorComponent {
     ){}
 
   dbHero:Hero | null = null;
+  dbHero:Hero | null = null;
   racelist:Race[] = [];
   careerlist:Career[] = [];
+  starterWeaponslist:Weapon[] = [];
   starterWeaponslist:Weapon[] = [];
   newEntityBaseSystem:EntityBaseSystem = {
     id: 0,
@@ -109,6 +114,7 @@ export class CharacterCreatorComponent {
   isDisabled:boolean = true
 
   async Create(){
+  async Create(){
     let newHero:Hero = {
       id: 0,
       heroName: this.createNewHero.value.heroName!,
@@ -130,12 +136,33 @@ export class CharacterCreatorComponent {
 
       }
     }
+    // dbHero:Hero | null = null;
+    // this.heroService.create(TableURL.Hero, newHero).subscribe(
+    //   (data) => {
+    //     console.log(data);
+        
+    //     this.dbHero = data;
+    // });
+
     let res = await firstValueFrom(this.heroService.create(TableURL.Hero, newHero).pipe(timeout(10000)))
 
+    console.log(res);
     if (res != null)
       localStorage.setItem("shero", res.id.toString())
     this.router.navigate(["/charactor-selector"])
     
   }
+
+  // LocalStorageWrite(){
+  //   localStorage.setItem('LogOn', '1')
+  // }
+
+  // LocalStorageRead():string{
+  //   let i = localStorage.getItem('LogOn')
+  //   if (i == null)
+  //     i = '0';
+  //   return i;
+  // }
+
 }
 
