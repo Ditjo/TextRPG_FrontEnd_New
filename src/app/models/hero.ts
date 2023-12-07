@@ -6,7 +6,6 @@ import { Race } from "./race";
 
 export interface Hero extends baseId
 {
-    // id: number;
     heroName: string | null;
     heroXp: number;
     level: number;

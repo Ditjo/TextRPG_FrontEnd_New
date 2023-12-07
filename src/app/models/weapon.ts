@@ -4,7 +4,6 @@ import { WeaponType } from "./weaponType";
 
 export interface Weapon extends baseId
 {
-    // id: number;
     weaponTypeId: number;
     weaponName: string | null;
     weaponDamageModifier: number;

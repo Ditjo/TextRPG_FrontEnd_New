@@ -3,7 +3,6 @@ import { SkillRollType } from "./skillRollType";
 
 export interface WeaponType extends baseId
 {
-    // id: number;
     weaponTypeName: string | null;
     skillRollTypeId: number;
     energyCost: number;
