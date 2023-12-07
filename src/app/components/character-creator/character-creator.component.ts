@@ -8,6 +8,8 @@ import { Hero } from '../../models/hero';
 import { Weapon } from '../../models/weapon';
 import { EntityBaseSystem } from '../../models/entityBaseSystem';
 import { DiceRollInterval } from '../../tools/diceroller';
+import { Router } from '@angular/router';
+import { firstValueFrom, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-character-creator',
@@ -16,15 +18,17 @@ import { DiceRollInterval } from '../../tools/diceroller';
 })
 export class CharacterCreatorComponent {
   constructor(
+    private router: Router,
     private raceService:GenericService<Race>,
     private careerService:GenericService<Career>,
     private weaponService:GenericService<Weapon>,
     private heroService:GenericService<Hero>
     ){}
 
+  dbHero:Hero | null = null;
   racelist:Race[] = [];
   careerlist:Career[] = [];
-  starterWeaponslist:Weapon[] = []
+  starterWeaponslist:Weapon[] = [];
   newEntityBaseSystem:EntityBaseSystem = {
     id: 0,
     strength: 0,
@@ -104,7 +108,7 @@ export class CharacterCreatorComponent {
 
   isDisabled:boolean = true
 
-  Create(){
+  async Create(){
     let newHero:Hero = {
       id: 0,
       heroName: this.createNewHero.value.heroName!,
@@ -126,9 +130,20 @@ export class CharacterCreatorComponent {
 
       }
     }
-    this.heroService.create(TableURL.Hero, newHero).subscribe();
-    // console.log(newHero);
-    
+    // dbHero:Hero | null = null;
+    // this.heroService.create(TableURL.Hero, newHero).subscribe(
+    //   (data) => {
+    //     console.log(data);
+        
+    //     this.dbHero = data;
+    // });
+
+    let res = await firstValueFrom(this.heroService.create(TableURL.Hero, newHero).pipe(timeout(10000)))
+
+    console.log(res);
+    if (res != null)
+      localStorage.setItem("shero", res.id.toString())
+    this.router.navigate(["/charactor-selector"])
     
   }
 
