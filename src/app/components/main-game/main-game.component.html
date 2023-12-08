@@ -5,8 +5,7 @@
     </div>
     <div class="view">
             <div class="gameview">
-                <router-outlet></router-outlet>
-                <!-- Game View -->
+                Game View
             </div>
             <div class="playerinfo">
                 <div class="playerinfoview">
@@ -102,5 +101,9 @@
             </div>
     </div>
     <div class="gamemenu">
+        <div class="gamemenubtn">
+            <button class="menubtn" (click)="ToBattle()">Battle</button>
+            <button class="menubtn" (click)="ToShop()">Shop</button>
+        </div>
     </div>
 </div>
