@@ -2,11 +2,11 @@
     <app-navbar [showNavbar]="true"></app-navbar>
 </div>
 <div class="content-container">
-    <p>Options</p>
+    <h2>Options</h2>
     <br>
     <p>Sound Slider</p>
-    <p>----------|----------</p>
-    <p>Other Options</p>
+    <p class="sound-slider">----------|----------</p>
+    <!-- <p>Other Options</p> -->
     <div class="buttons">
         <button class="tutorial" (click)="tutorial()">Tutorial</button>
         <div *ngIf="LocalStorageRead() == '1'">
