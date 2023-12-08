@@ -29,6 +29,9 @@ export class AdminPanelComponent
   weaponlist:Weapon[] = [];
 
   selectedCareer?:Career;
+  selectedRace?:Race;
+  selectedWeapon?:Weapon;
+
   showList: string = "";
 
   ngOnInit()
@@ -72,6 +75,11 @@ export class AdminPanelComponent
     raceName: new FormControl("")
   })
 
+  createNewWeapon = new FormGroup
+  ({
+    weaponName: new FormControl("")
+  })
+
   SelectCareer(career:Career): void
   {
     this.selectedCareer = career;
@@ -80,6 +88,26 @@ export class AdminPanelComponent
       careerName: this.selectedCareer.careerType
     })
     this.createNewCareer.disable();
+  }
+
+  SelectRace(race:Race): void
+  {
+    this.selectedRace = race;
+    console.log(this.selectedRace)
+    this.createNewRace.patchValue({
+      raceName: this.selectedRace.raceType
+    })
+    this.createNewRace.disable();
+  }
+
+  SelectWeapon(weapon:Weapon): void
+  {
+    this.selectedWeapon = weapon;
+    console.log(this.selectedWeapon)
+    this.createNewWeapon.patchValue({
+      weaponName: this.selectedWeapon.weaponName
+    })
+    this.createNewWeapon.disable();
   }
 
   Career(): void
@@ -105,14 +133,13 @@ export class AdminPanelComponent
     // Career
     if (this.showList == TableURL.Career)
     {
-      let newCareer: Career={
+      let newCareer: Career = {
         id: 0, careerType: this.createNewCareer.value.careerName as unknown as string
       }
       console.log(newCareer)
 
       this.careerService.create(TableURL.Career, newCareer).subscribe(
-        () =>
-        {
+        () => {
           this.GetAllCareer();
         }
       )
@@ -120,10 +147,36 @@ export class AdminPanelComponent
     }
 
     // Race
+    if (this.showList == TableURL.Race)
+    {
+      let newRace: Race = {
+        id: 0, raceType: this.createNewRace.value.raceName as unknown as string
+      }
+      console.log(newRace)
 
+      this.raceService.create(TableURL.Race, newRace).subscribe(
+        () => {
+          this.GetAllRace();
+        }
+      )
+      this.createNewRace.reset();
+    }
 
     // Weapon
-    
+    // if (this.showList == TableURL.Weapon)
+    // {
+    //   let newWeapon: Weapon = {
+    //     id: 0, weaponName: this.createNewWeapon.value.weaponName as unknown as string
+    //   }
+    //   console.log(newWeapon)
+
+    //   this.weaponService.create(TableURL.Weapon, newWeapon).subscribe(
+    //     () => {
+    //       this.GetAllWeapon();
+    //     }
+    //   )
+    //   this.createNewWeapon.reset();
+    // }
   }
 
   Update(): void

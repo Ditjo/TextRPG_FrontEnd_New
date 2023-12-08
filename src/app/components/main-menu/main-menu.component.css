@@ -27,11 +27,12 @@ ul:hover li a
 {
     color: #200c;
 }
-  ul li:hover a
-  {
+
+ul li:hover a
+{
     color: #c00;
     background: transparent;
-  }
+}
 
 .container
 {
