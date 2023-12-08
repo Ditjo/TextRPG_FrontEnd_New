@@ -41,9 +41,9 @@ export class GenericService<T>
     return this.http.post<T>(this.apiUrl + url, item, httpOptions);
   }
 
-  update(url:string, item: T): Observable<void>
+  update(url:string, item: T): Observable<T>
   {
-    return this.http.put<void>(`${this.apiUrl}${url}${(item as baseId).id}`, item, httpOptions);
+    return this.http.put<T>(`${this.apiUrl}${url}${(item as baseId).id}`, item, httpOptions);
   }
 
   delete(url:string, id: number): Observable<void>

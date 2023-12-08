@@ -161,11 +161,10 @@
         <button (click)="GetAllHeros()">Get All Hero</button>
     </div> -->
     <div class="flex-container">
-        <a class="buttons" routerLink="/main-game">Venture On</a>
-        <br>
-        <br>
-        <a class="buttons" routerLink="/character-creator">Create New Hero</a>
-        <button class="buttons" (click)="UpdateHero()" [disabled]="!selectedhero">Edit Hero</button>
+        <button class="buttons" (click)="CreateNewHero()" [disabled]="isEditable">Create New Hero</button>
+        <button class="buttons" (click)="DeleteSelectedHero()" [disabled]="!selectedhero || isEditable">Delete</button>
+        <button class="buttons" (click)="UpdateHero()" [disabled]="!selectedhero || isEditable">Edit Hero</button>
         <button class="buttons" (click)="SaveChanges()" [hidden]="!isEditable" [disabled]="!updateSelectedHero.value.heroName">Save Changes</button>
+        <button class="buttons" (click)="ToMainGame()" [disabled]="!selectedhero || isEditable">Venture On</button>
     </div>
 </div>

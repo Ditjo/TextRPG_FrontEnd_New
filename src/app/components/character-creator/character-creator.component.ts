@@ -130,33 +130,12 @@ export class CharacterCreatorComponent {
 
       }
     }
-    // dbHero:Hero | null = null;
-    // this.heroService.create(TableURL.Hero, newHero).subscribe(
-    //   (data) => {
-    //     console.log(data);
-        
-    //     this.dbHero = data;
-    // });
-
     let res = await firstValueFrom(this.heroService.create(TableURL.Hero, newHero).pipe(timeout(10000)))
 
-    console.log(res);
     if (res != null)
       localStorage.setItem("shero", res.id.toString())
     this.router.navigate(["/charactor-selector"])
     
   }
-
-  // LocalStorageWrite(){
-  //   localStorage.setItem('LogOn', '1')
-  // }
-
-  // LocalStorageRead():string{
-  //   let i = localStorage.getItem('LogOn')
-  //   if (i == null)
-  //     i = '0';
-  //   return i;
-  // }
-
 }
 
