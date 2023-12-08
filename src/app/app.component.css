@@ -8,19 +8,19 @@
     display: contents;
 }
 
-.header{
+/* .header{
     flex: 0 1 auto;
-    /* height: 5vh; */
+    height: 5vh;
     background-color:saddlebrown;
-}
+} */
 
 .view {
     flex: 1 1 auto;
     /* height: 100%; */
 }
 
-.footer{
+/* .footer{
     flex: 0 1 40px;
-    /* height: 5vh; */
+    height: 5vh;
     background-color:saddlebrown;
-}
+} */

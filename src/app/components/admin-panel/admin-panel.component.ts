@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
-import { ArmourService } from '../../services/armour.service';
 import { Armour } from '../../models/armour';
-import { HeroService } from '../../services/hero.service';
 import { Hero } from '../../models/hero';
 import { GenericService } from '../../services/generic.service';
 import { HttpClient } from '@angular/common/http';
@@ -18,9 +16,7 @@ export class AdminPanelComponent
   constructor(
     private armourService:GenericService<Armour>,
     private heroService:GenericService<Hero>
-    ){
-    
-  }
+    ){}
   
   armourlist:Armour[] = [];
   herolist:Hero[] = []
