@@ -1,0 +1,10 @@
+.view{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.fillertable{
+    background-color: white;
+    opacity: 0.5;
+}
