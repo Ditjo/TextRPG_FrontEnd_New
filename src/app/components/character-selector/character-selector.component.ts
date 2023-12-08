@@ -5,7 +5,8 @@ import { TableURL } from '../../tools/table-url';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Career } from '../../models/career';
 import { Race } from '../../models/race';
-import { defaultIfEmpty, firstValueFrom, timeout } from 'rxjs';
+import { defaultIfEmpty, firstValueFrom, switchMap, timeout } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-character-selector',
@@ -15,6 +16,7 @@ import { defaultIfEmpty, firstValueFrom, timeout } from 'rxjs';
 export class CharacterSelectorComponent {
 
   constructor(
+    private router: Router,
     private heroService:GenericService<Hero>,
     private raceService:GenericService<Race>,
     private careerService:GenericService<Career>,
@@ -26,14 +28,15 @@ export class CharacterSelectorComponent {
   racelist:Race[] = [];
   careerlist:Career[] = [];
   selectedhero?:Hero
+  temp?:Hero
   isEditable: boolean = false;
 
   async ngOnInit(){
     this.GetAllHeros()
     this.GetAllRaces();
     this.GetAllCareer();
+
     let i = localStorage.getItem('shero')
-    console.log(i);
     
     if (i != null ){
       this.SelectHero(await firstValueFrom(
@@ -46,11 +49,9 @@ export class CharacterSelectorComponent {
   }
 
   GetAllHeros(){
-    // console.log("I'm in GettAllHeros");
     this.heroService.getAll(TableURL.Hero).subscribe(
       (data) =>{
         this.herolist = data;
-        console.log(this.herolist);
       }
     )
   }
@@ -86,9 +87,6 @@ export class CharacterSelectorComponent {
   }
   
   UpdateHero(){
-    // console.log(this.selectedhero?.heroName);
-    
-    // this.updateSelectedHero.reset()
     this.updateSelectedHero.patchValue(
       {
         heroName: this.selectedhero?.heroName,
@@ -102,7 +100,7 @@ export class CharacterSelectorComponent {
     
   }
 
-  SaveChanges(){
+  async SaveChanges(){
 
     let updatedHero:Hero
     if(this.selectedhero != null){
@@ -117,11 +115,41 @@ export class CharacterSelectorComponent {
         updatedHero.careerId = this.updateSelectedHero.value.career.id
       if (this.updateSelectedHero.value.note != null)
         updatedHero.note = this.updateSelectedHero.value.note
-    
-      this.heroService.update(TableURL.Hero, updatedHero).subscribe();
-      this.SelectHero(updatedHero)
+      
+      let res = await firstValueFrom(this.heroService.update(TableURL.Hero, updatedHero).pipe(timeout(10000)));
+      let res1 = await firstValueFrom(this.heroService.getById(TableURL.Hero, updatedHero.id).pipe(timeout(10000)));
+
+      this.heroService.getAll(TableURL.Hero).subscribe(
+        (data) =>{
+          this.herolist = data;
+        }
+      );
+      if (res1 != null)
+        this.SelectHero(res1);
     }
+  }
 
+  DeleteSelectedHero(){
+    
+    if(this.selectedhero != null){
+      console.log(this.selectedhero?.id);
+      this.heroService.delete(TableURL.Hero,this.selectedhero.id).subscribe(
+        () =>{
+          this.GetAllHeros();
+        }
+      )
+      this.selectedhero = undefined;
+    }
+  }
 
+  ToMainGame(){
+    if(this.selectedhero != null){
+      localStorage.setItem('HeroToGame',this.selectedhero?.id.toString())
+      this.router.navigate(["/main-game"])
+    }
+  }
+
+  CreateNewHero(){
+    this.router.navigate(["/character-creator"])
   }
 }
