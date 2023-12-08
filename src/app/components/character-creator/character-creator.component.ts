@@ -10,8 +10,6 @@ import { EntityBaseSystem } from '../../models/entityBaseSystem';
 import { DiceRollInterval } from '../../tools/diceroller';
 import { Router } from '@angular/router';
 import { firstValueFrom, timeout } from 'rxjs';
-import { Router } from '@angular/router';
-import { firstValueFrom, timeout } from 'rxjs';
 
 @Component({
   selector: 'app-character-creator',
@@ -21,7 +19,6 @@ import { firstValueFrom, timeout } from 'rxjs';
 export class CharacterCreatorComponent {
   constructor(
     private router: Router,
-    private router: Router,
     private raceService:GenericService<Race>,
     private careerService:GenericService<Career>,
     private weaponService:GenericService<Weapon>,
@@ -29,10 +26,8 @@ export class CharacterCreatorComponent {
     ){}
 
   dbHero:Hero | null = null;
-  dbHero:Hero | null = null;
   racelist:Race[] = [];
   careerlist:Career[] = [];
-  starterWeaponslist:Weapon[] = [];
   starterWeaponslist:Weapon[] = [];
   newEntityBaseSystem:EntityBaseSystem = {
     id: 0,
@@ -113,7 +108,6 @@ export class CharacterCreatorComponent {
 
   isDisabled:boolean = true
 
-  async Create(){
   async Create(){
     let newHero:Hero = {
       id: 0,
