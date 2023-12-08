@@ -8,15 +8,6 @@ import { Hero } from '../../models/hero';
 import { Weapon } from '../../models/weapon';
 import { EntityBaseSystem } from '../../models/entityBaseSystem';
 import { DiceRollInterval } from '../../tools/diceroller';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GenericService } from '../../services/generic.service';
-import { Race } from '../../models/race';
-import { TableURL } from '../../tools/table-url';
-import { Career } from '../../models/career';
-import { Hero } from '../../models/hero';
-import { Weapon } from '../../models/weapon';
-import { EntityBaseSystem } from '../../models/entityBaseSystem';
-import { DiceRollInterval } from '../../tools/diceroller';
 
 @Component({
   selector: 'app-character-creator',
