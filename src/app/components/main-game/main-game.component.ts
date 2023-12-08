@@ -16,8 +16,6 @@ export class MainGameComponent {
     
   }
   ngOnInit(){
-
-
     let i = localStorage.getItem('HeroToGame')
 
     if (i != null ){
@@ -31,4 +29,17 @@ export class MainGameComponent {
   }
 
   playingHero?:Hero
+  playerInfoToShow:string = "info";
+
+  SwitchPlayerInfo(input:string): void{
+    this.playerInfoToShow = input;
+  }
+
+  ToShop(): void{
+    console.log('The shop is closed');
+  }
+
+  ToBattle(): void{
+    console.log('There are no monsters to find');
+  }
 }
