@@ -13,40 +13,51 @@
     <div class="content">
         <div class="selection-list">
             <ul *ngIf="showList == 'Race/'">
-                <li *ngFor="let race of racelist">
-                    <button>
+                <li class="item-list" *ngFor="let race of racelist">
+                    <button class="item-buttons" (click)="SelectRace(race)">
                         {{race.raceType}}
                     </button>
                 </li>
             </ul>
             <ul *ngIf="showList == 'Career/'">
-                <li *ngFor="let career of careerlist">
-                    <button (click)="SelectCareer(career)">
+                <li class="item-list" *ngFor="let career of careerlist">
+                    <button class="item-buttons" (click)="SelectCareer(career)">
                         {{career.careerType}}
                     </button>
                 </li>
             </ul>
             <ul *ngIf="showList == 'Weapon/'">
-                <li *ngFor="let weapon of weaponlist">
-                    <button>
+                <li class="item-list" *ngFor="let weapon of weaponlist">
+                    <button class="item-buttons">
                         {{weapon.weaponName}}
                     </button>
                 </li>
             </ul>
         </div>
 
-        <div class="form">
+        <div class="form-container">
             <div class="career-form" *ngIf="showList == 'Career/'">
                 <form [formGroup]="createNewCareer">
                     <div class="career-container">
-                        <label for="careerName">Career: </label>
-                        <input id="careeName" type="text" formControlName="careerName">
+                        <!-- <label for="careerName">Career: </label> -->
+                        <input id="careeName" type="text" formControlName="careerName" placeholder="Career:">
                     </div>
                 </form>
             </div>
-            <div class="race-form">
-
+            <div class="race-form" *ngIf="showList == 'Race/'">
+                <form [formGroup]="createNewRace">
+                    <div class="race-container">
+                        <!-- <label for="raceName">Race: </label> -->
+                        <input id="raceName" type="text" formControlName="raceName" placeholder="Race:">
+                    </div>
+                </form>
             </div>
+            <form [formGroup]="createNewWeapon">
+                <div class="weapon-form" *ngIf="showList == 'Weapon/'">
+                    <!-- <label for="wepaonName">Weapon: </label> -->
+                    <input id="weaponName" type="text" formControlName="weaponName" placeholder="Weapon:">
+                </div>
+            </form>
         </div>
     </div>
 
