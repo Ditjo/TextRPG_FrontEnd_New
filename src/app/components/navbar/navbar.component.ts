@@ -28,7 +28,7 @@ export class NavBarComponent
   }
   
   //Switch Account
-  account: string = "user";
+  account: string = 'User';
   LocalStorageWrite(){
     if(localStorage.getItem('LogOn') == '0')
     {
