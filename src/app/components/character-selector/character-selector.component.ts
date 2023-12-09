@@ -145,7 +145,7 @@ export class CharacterSelectorComponent {
   ToMainGame(){
     if(this.selectedhero != null){
       localStorage.setItem('HeroToGame',this.selectedhero?.id.toString())
-      this.router.navigate(["/main-game"])
+      this.router.navigate(["/main-game"],{ state: { input: this.selectedhero}})
     }
   }
 

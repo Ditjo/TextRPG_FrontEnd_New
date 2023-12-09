@@ -16,6 +16,9 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavBarComponent } from './components/navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GameBattleComponent } from './components/game-battle/game-battle.component';
+import { GameShopComponent } from './components/game-shop/game-shop.component';
+import { GameAdventureMenuComponent } from './components/game-adventure-menu/game-adventure-menu.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TutorialComponent,
     HeaderComponent,
     FooterComponent,
-    NavBarComponent
+    NavBarComponent,
+    GameBattleComponent,
+    GameShopComponent,
+    GameAdventureMenuComponent
   ],
   imports: [
     BrowserModule,
