@@ -1,0 +1,45 @@
+<div class="mainview">
+    <div class="gameview">
+        <div class="imageview">
+            
+        </div>
+        <div class="bars">
+            <div class="herobar">
+                <h4>{{monsterInFight?.monsterName}}</h4>
+                <div>
+                    <label>Health</label>
+                    <progress max="{{monsterInFight?.entityBaseSystem?.health}}" value="{{monsterHealth}}"></progress>
+                </div>
+                <div>
+                    <label>Energy</label>
+                    <progress max={{monsterInFight?.entityBaseSystem?.energy}} value={{monsterEnergy}}></progress>
+                </div>
+            </div>
+            <div class="distance">
+                1
+            </div>
+            <div class="monsterbar">
+                <h4>{{heroInFight.heroName}}</h4>
+                <div>
+                    <label>Health</label>
+                    <progress max="{{heroInFight.entityBaseSystem.health}}" value="{{heroHealth}}"></progress>
+                </div>
+                <div>
+                    <label>Energy</label>
+                    <progress max={{heroInFight.entityBaseSystem.energy}} value={{heroEnergy}}></progress>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="menu">
+        <button class="menubtn" (click)="Return()">Return</button>
+        <button class="menubtn" (click)="Attack()">Attack</button>
+        <button class="menubtn" (click)="Defend()">Defend</button>
+        <button class="menubtn" (click)="MoveCloser()">Move Closer</button>
+        <button class="menubtn" (click)="MoveAway()">Move Away</button>
+        <button class="menubtn" (click)="Rest()">Rest</button>
+        <button class="menubtn" (click)="UseItem()">Use Item</button>
+        <button class="menubtn" (click)="Flea()">Flea</button>
+    </div>
+</div>

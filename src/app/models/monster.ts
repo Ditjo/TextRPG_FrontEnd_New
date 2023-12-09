@@ -9,6 +9,6 @@ export interface Monster extends baseId
     levelDifficulty: number;
     note: string | null;
 
-    ebs: EntityBaseSystem;
+    entityBaseSystem: EntityBaseSystem;
     inventory: Inventory;
 }
