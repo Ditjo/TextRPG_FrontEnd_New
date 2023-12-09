@@ -18,7 +18,7 @@ export class MainGameComponent {
   ){
     this.playingHero = this.router.getCurrentNavigation()?.extras?.state?.['input']
     // this.router.navigate(['./adventure-menu'], {relativeTo: this.route, state: { input: this.playingHero}});
-    console.log(this.playingHero);
+    // console.log(this.playingHero);
     
   }
   ngOnInit(){
@@ -42,13 +42,13 @@ export class MainGameComponent {
     this.playerInfoToShow = input;
   }
 
-  ToShop(): void{
-    console.log('The shop is closed');
-    this.router.navigate(["./shop"], {relativeTo: this.route})
-  }
+  // ToShop(): void{
+  //   // console.log('The shop is closed');
+  //   this.router.navigate(["./shop"], {relativeTo: this.route})
+  // }
 
-  ToBattle(): void{
-    console.log('There are no monsters to find');
-    this.router.navigate(['./battle'], {relativeTo: this.route})
-  }
+  // ToBattle(): void{
+  //   // console.log('There are no monsters to find');
+  //   this.router.navigate(['./battle'], {relativeTo: this.route})
+  // }
 }

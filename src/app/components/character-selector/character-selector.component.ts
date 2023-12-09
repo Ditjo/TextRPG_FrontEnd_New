@@ -82,7 +82,7 @@ export class CharacterSelectorComponent {
   SelectHero(hero:Hero){
     this.isEditable = false;
     this.selectedhero = hero;
-    console.log(this.selectedhero);
+    // console.log(this.selectedhero);
     
   }
   
@@ -143,7 +143,7 @@ export class CharacterSelectorComponent {
 
   ToMainGame(){
     if(this.selectedhero != null){
-      localStorage.setItem('HeroToGame',this.selectedhero?.id.toString())
+      // localStorage.setItem('HeroToGame',this.selectedhero?.id.toString())
       this.router.navigate(["/main-game"],{ state: { input: this.selectedhero}})
     }
   }

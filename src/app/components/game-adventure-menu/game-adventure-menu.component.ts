@@ -21,12 +21,12 @@ export class GameAdventureMenuComponent {
   playingHero:Hero
 
   ToShop(): void{
-    console.log('The shop is closed');
+    // console.log('The shop is closed');
     this.router.navigate(["../shop"], {relativeTo: this.route, state: { input: this.playingHero}})
   }
 
   ToBattle(): void{
-    console.log('There are no monsters to find');
+    // console.log('There are no monsters to find');
     this.router.navigate(['../battle'], {relativeTo: this.route, state: { input: this.playingHero}})
   }
 }
