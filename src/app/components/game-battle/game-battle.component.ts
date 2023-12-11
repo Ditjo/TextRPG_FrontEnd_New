@@ -5,6 +5,13 @@ import { GenericService } from '../../services/generic.service';
 import { TableURL } from '../../tools/table-url';
 import { Hero } from '../../models/hero';
 import { DiceRollInterval } from '../../tools/diceroller';
+import { EntityBaseSystem } from '../../models/entityBaseSystem';
+import { Weapon } from '../../models/weapon';
+import { Inventory } from '../../models/inventory';
+import { Armour } from '../../models/armour';
+import { GameActions } from '../../tools/game-actions';
+import { ResetEntity } from '../../tools/reset-fighters';
+
 
 @Component({
   selector: 'app-game-battle',
@@ -21,19 +28,28 @@ export class GameBattleComponent {
     this.staticHero = this.router.getCurrentNavigation()?.extras?.state?.['input']
     this.dynamicHero = JSON.parse(JSON.stringify(this.staticHero));
     this.GetAMonsterToFight();
-    
+    this.gameAction = new GameActions
   }
-
+  public gameAction:GameActions
 ngOnInit(){
-
+  // const gameAction = new GameActions
+  // this.gameAction = new GameActions
 }
 
   staticHero!:Hero
   dynamicHero!:Hero
+  heroSelectedWeapon!:Weapon | undefined
   staticMonster?:Monster
   dynamicMonster?:Monster
+  monsterSelectedWeapon!:Weapon | undefined
   monstersTurn:boolean = false
   turns:number = 2
+
+  CanAttack:boolean = false;
+  CanDefend:boolean = false;
+  CanMoveCloser:boolean = false;
+  CanMoveAway:boolean = false;
+  CanFlea:boolean = false;
 
   GetAMonsterToFight():void{
     this.monsterService.getAll(TableURL.Monster).subscribe(
@@ -52,6 +68,13 @@ ngOnInit(){
     if ( this.dynamicMonster == null)
       return
 
+    if( this.dynamicHero.inventory.weapons != null)
+      this.heroSelectedWeapon = this.dynamicHero.inventory.weapons.at(0)
+    
+    
+    if( this.dynamicMonster.inventory.weapons != null)
+      this.monsterSelectedWeapon = this.dynamicMonster.inventory.weapons.at(0)
+
     if ((this.dynamicMonster?.entityBaseSystem.agility + DiceRollInterval(1,3)) > (this.dynamicHero.entityBaseSystem.agility + DiceRollInterval(1,3))){
       this.monstersTurn = true;
       console.log('Monster goes first');
@@ -66,9 +89,12 @@ ngOnInit(){
 
   BattleLoop():void{
     // console.log('BattleLoop');
-    
+    if ( this.dynamicMonster == null || this.staticMonster == null)
+    return
+    //if Health == 0 then end battle
     if (this.monstersTurn){
       //Reset Dynamic Monster
+      ResetEntity(this.dynamicMonster?.entityBaseSystem, this.staticMonster?.entityBaseSystem)
       while (this.turns != 0){
         this.turns -= 1
         this.CallMonster()
@@ -76,9 +102,12 @@ ngOnInit(){
       this.turns = 2;
       this.monstersTurn = false
       //Reset Dynamic Hero
+      ResetEntity(this.dynamicHero.entityBaseSystem,this.staticHero.entityBaseSystem)
+      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon)
     }
     else{
       this.monstersTurn = true;
+      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon)
     }
   }
 
@@ -97,12 +126,18 @@ ngOnInit(){
     // console.log(this.staticHero);
     // console.log('Dynamic Hero');
     // console.log(this.dynamicHero);
-
+    this.gameAction.ActionAttack(this.heroSelectedWeapon, this.dynamicHero.entityBaseSystem, this.dynamicMonster?.entityBaseSystem!, this.dynamicHero.inventory.armour)
     console.log('Hero Attack');
+    // this.ActionAttack(this.heroSelectedWeapon, this.dynamicHero.entityBaseSystem, this.dynamicMonster?.entityBaseSystem!, this.dynamicHero.inventory.armour)
     this.BattleLoop()
   }
   Defend():void{
     console.log('Hero Defend');
+    this.gameAction.ActionDefend(this.dynamicHero.entityBaseSystem)
+    // this.ActionDefend(this.dynamicHero.entityBaseSystem);
+    // console.log('Hero after Defend is called');
+    // console.log(this.dynamicHero.entityBaseSystem.armourModifier);
+    
     this.BattleLoop()
   }
   MoveCloser():void{
@@ -115,17 +150,120 @@ ngOnInit(){
   }
   Rest():void{
     console.log('Hero Rests');
+    this.gameAction.ActionRest(this.dynamicHero.entityBaseSystem)
     this.BattleLoop()
   }
   UseItem():void{
     console.log('Hero Uses Item');
     this.BattleLoop()
   }
+  SwitchWeapon():void{
+    console.log('HeroSwitched Weapons');
+    this.FreeActionSwitchWeapon();
+    this.BattleLoop()
+  }
   Flea():void{
     console.log('Hero Fleeas');
     this.router.navigate(["../adventure-menu"], {relativeTo: this.route, state: { input: this.staticHero}})
   }
-  Return(): void{
-    this.router.navigate(["../adventure-menu"], {relativeTo: this.route, state: { input: this.staticHero}})
+  // Return(): void{
+  //   this.router.navigate(["../adventure-menu"], {relativeTo: this.route, state: { input: this.staticHero}})
+  // }
+
+  //This Method Stayes here
+  FreeActionSwitchWeapon(){
+    if( this.dynamicHero.inventory.weapons != null && this.dynamicHero.inventory.weapons.length == 2){
+      if ( this.heroSelectedWeapon?.id == this.dynamicHero.inventory.weapons?.at(0)?.id){
+        this.heroSelectedWeapon = this.dynamicHero.inventory.weapons?.at(1);
+      }
+      else{
+        this.heroSelectedWeapon = this.dynamicHero.inventory.weapons.at(0);
+      }
+    }
   }
+
+  // ActionAttack(attackWeapon:Weapon | undefined, attackEbs:EntityBaseSystem, defendEbs:EntityBaseSystem, defendArmour:Armour | null):void{
+  //   if(attackEbs != null && defendEbs != null && attackWeapon != null){
+  //     attackEbs.energy -= attackWeapon?.weaponType.energyCost
+  //     console.log('Energy Cost: ' + attackWeapon?.weaponType.energyCost);
+      
+  //     if(attackEbs.strength > DiceRollInterval(1,20)){
+  //       let totalDamage;
+  //       if (attackWeapon != null){
+  //         totalDamage = DiceRollInterval(1,attackWeapon.weaponType?.damageDice) + attackWeapon.weaponDamageModifier + attackEbs.damageModifier;
+  //         // console.log(attackEbs);
+  //         // console.log(attackEbs.damageModifier);
+  //       }
+  //       else{
+  //         totalDamage = DiceRollInterval(1,4) + attackEbs.damageModifier
+  //       }
+  //       console.log('Total Damage: ' + totalDamage);
+        
+        
+  //       let actualDamage = totalDamage - defendEbs.armourModifier;
+
+  //       console.log('Actual Damage: ' + actualDamage);
+
+  //       if(defendArmour != null)
+  //         actualDamage -= defendArmour.armourModifier;
+
+  //       if(actualDamage > 0){
+  //         defendEbs.health -= actualDamage
+  //         console.log('Given ' + actualDamage + ' in damage');
+  //       }
+  //       else{
+  //         console.log('Given no damage');
+  //       }
+  //     }
+  //     else{
+  //       console.log('Attack Missed');
+  //     }
+
+  //   }
+  // }
+
+  // ActionDefend(ebs:EntityBaseSystem):void{
+  //   ebs.armourModifier += 1;
+  //   console.log('ActionDefend');
+  //   console.log(ebs.armourModifier);
+    
+  // }
+
+  // ResetEntity(dynamicEbs:EntityBaseSystem, staticEbs:EntityBaseSystem):void{
+  //   dynamicEbs.armourModifier = staticEbs.armourModifier
+  //   dynamicEbs.damageModifier = staticEbs.damageModifier
+  //   dynamicEbs.energyModifier = staticEbs.energyModifier
+  //   dynamicEbs.healthModifier = staticEbs.healthModifier
+  // }
+
+  CanAction(ebs:EntityBaseSystem, weapon:Weapon | undefined):void{
+
+    let baseAttackCost:number
+
+    if ( weapon == null || weapon == undefined)
+      baseAttackCost = 2
+    else
+      baseAttackCost = weapon.weaponType.energyCost
+
+    if (ebs.energy < baseAttackCost)
+      this.CanAttack = true;
+    else
+      this.CanAttack = false;
+
+    if (ebs.energy < this.gameAction.DefendsEnergyCost)
+      this.CanDefend = true;
+    else
+      this.CanDefend = false;
+
+    if (ebs.energy < this.gameAction.MoveEnergyCost)
+      this.CanMoveAway = true;
+    else 
+      this.CanMoveAway = false;
+
+      if (ebs.energy < this.gameAction.MoveEnergyCost)
+      this.CanMoveCloser = true;
+    else 
+      this.CanMoveCloser = false;
+  }
+
 }
