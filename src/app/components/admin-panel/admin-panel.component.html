@@ -28,7 +28,7 @@
             </ul>
             <ul *ngIf="showList == 'Weapon/'">
                 <li class="item-list" *ngFor="let weapon of weaponlist">
-                    <button class="item-buttons">
+                    <button class="item-buttons" (click)="SelectWeapon(weapon)">
                         {{weapon.weaponName}}
                     </button>
                 </li>
@@ -39,25 +39,27 @@
             <div class="career-form" *ngIf="showList == 'Career/'">
                 <form [formGroup]="createNewCareer">
                     <div class="career-container">
-                        <!-- <label for="careerName">Career: </label> -->
-                        <input id="careeName" type="text" formControlName="careerName" placeholder="Career:">
+                        <input id="careeName" type="text" formControlName="careerName" placeholder="Career :">
                     </div>
                 </form>
             </div>
             <div class="race-form" *ngIf="showList == 'Race/'">
                 <form [formGroup]="createNewRace">
                     <div class="race-container">
-                        <!-- <label for="raceName">Race: </label> -->
-                        <input id="raceName" type="text" formControlName="raceName" placeholder="Race:">
+                        <input id="raceName" type="text" formControlName="raceName" placeholder="Race :">
                     </div>
                 </form>
             </div>
-            <form [formGroup]="createNewWeapon">
-                <div class="weapon-form" *ngIf="showList == 'Weapon/'">
-                    <!-- <label for="wepaonName">Weapon: </label> -->
-                    <input id="weaponName" type="text" formControlName="weaponName" placeholder="Weapon:">
-                </div>
-            </form>
+            <div class="race-form" *ngIf="showList == 'Weapon/'">
+                <form [formGroup]="createNewWeapon">
+                    <div class="weapon-form" *ngIf="showList == 'Weapon/'">
+                        <input id="weaponName" type="text" formControlName="weaponName" placeholder="Weapon :">
+                    </div>
+                </form>
+            </div>
+            <div *ngIf="IsSaveable">
+                <button class="save-btn" (click)="SaveEdit()">Save changes</button>
+            </div>
         </div>
     </div>
 
@@ -65,7 +67,7 @@
         <ul class="ul-bottom">
             <li class="li-bottom"><button (click)="Create()">Create</button></li>
             <li class="li-bottom"><button (click)="Update()">Edit</button></li>
-            <li class="li-bottom"><button (click)="Delete()">Delete</button></li>
+            <li class="li-bottom" id="delete-btn"><button (click)="Delete()">Delete</button></li>
         </ul>
     </nav>
 </div>
