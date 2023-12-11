@@ -107,10 +107,9 @@ export class CharacterSelectorComponent {
       updatedHero = this.selectedhero
 
       if (this.updateSelectedHero.value.heroName != null)
-      updatedHero.heroName = this.updateSelectedHero.value.heroName
-      if(this.updateSelectedHero.value.race != null){
+        updatedHero.heroName = this.updateSelectedHero.value.heroName
+      if(this.updateSelectedHero.value.race != null)
         updatedHero.raceId = this.updateSelectedHero.value.race.id
-      }
       if ( this.updateSelectedHero.value.career != null)
         updatedHero.careerId = this.updateSelectedHero.value.career.id
       if (this.updateSelectedHero.value.note != null)
