@@ -4,7 +4,7 @@
             
         </div>
         <div class="bars">
-            <div class="herobar">
+            <div class="monsterbar">
                 <h4>{{staticMonster?.monsterName}}</h4>
                 <div>
                     <label>Health</label>
@@ -14,11 +14,15 @@
                     <label>Energy</label>
                     <progress max={{staticMonster?.entityBaseSystem?.energy}} value={{dynamicMonster?.entityBaseSystem?.energy}}></progress>
                 </div>
+                <div>
+                    <label>Weapon in Hand</label>
+                    <div>{{monsterSelectedWeapon?.weaponName}}</div>
+                </div>
             </div>
             <div class="distance">
                 1
             </div>
-            <div class="monsterbar">
+            <div class="herobar">
                 <h4>{{staticHero.heroName}}</h4>
                 <div>
                     <label>Health</label>
@@ -28,18 +32,23 @@
                     <label>Energy</label>
                     <progress max={{staticHero.entityBaseSystem.energy}} value={{dynamicHero.entityBaseSystem.energy}}></progress>
                 </div>
+                <div>
+                    <label>Weapon in Hand</label>
+                    <div>{{heroSelectedWeapon?.weaponName}}</div>
+                </div>
             </div>
         </div>
 
     </div>
     <div class="menu">
         <!-- <button class="menubtn" (click)="Return()">Return</button> -->
-        <button class="menubtn" (click)="Attack()">Attack</button>
-        <button class="menubtn" (click)="Defend()">Defend</button>
-        <button class="menubtn" (click)="MoveCloser()">Move Closer</button>
-        <button class="menubtn" (click)="MoveAway()">Move Away</button>
+        <button class="menubtn" (click)="Attack()" [disabled]="CanAttack">Attack</button>
+        <button class="menubtn" (click)="Defend()" [disabled]="CanDefend">Defend</button>
+        <button class="menubtn" (click)="MoveCloser()" [disabled]="CanMoveCloser">Move Closer</button>
+        <button class="menubtn" (click)="MoveAway()" [disabled]="CanMoveAway">Move Away</button>
         <button class="menubtn" (click)="Rest()">Rest</button>
         <button class="menubtn" (click)="UseItem()">Use Item</button>
+        <button class="menubtn" (click)="SwitchWeapon()">Switch Weapon</button>
         <button class="menubtn" (click)="Flea()">Flea</button>
     </div>
 </div>
