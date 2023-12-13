@@ -49,8 +49,6 @@ ngOnInit(){
   turns:number = 2
   distance:distance = {distance:1}
 
-
-
   CantAttack:boolean = false;
   CantDefend:boolean = false;
   CantMoveCloser:boolean = false;
@@ -88,7 +86,7 @@ ngOnInit(){
     }
     else{
       console.log('Hero goes first');
-      
+      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon, this.distance)
     }
 
   }
@@ -171,7 +169,7 @@ ngOnInit(){
     this.BattleLoop()
   }
   Flea():void{
-    console.log('Hero Fleeas');
+    console.log('Hero Flees');
     this.router.navigate(["../adventure-menu"], {relativeTo: this.route, state: { input: this.staticHero}})
   }
   // Return(): void{
@@ -259,8 +257,8 @@ ngOnInit(){
       baseWeaponRange = weapon.weaponType.range
     }
 
-    if (ebs.energy < baseAttackCost && 
-        baseWeaponRange >= distance.distance)
+    if (ebs.energy < baseAttackCost || 
+        baseWeaponRange < distance.distance)
       this.CantAttack = true;
     else
       this.CantAttack = false;
@@ -272,15 +270,15 @@ ngOnInit(){
       this.CantDefend = false;
 
     //Can MoveAway
-    if (ebs.energy < this.gameAction.MoveEnergyCost &&
-        distance.distance < 3)
+    if (ebs.energy < this.gameAction.MoveEnergyCost ||
+        distance.distance >= 3)
       this.CantMoveAway = true;
     else 
       this.CantMoveAway = false;
 
     //Can MoveCloser
-    if (ebs.energy < this.gameAction.MoveEnergyCost &&
-        distance.distance > 0)
+    if (ebs.energy < this.gameAction.MoveEnergyCost ||
+        distance.distance <= 0)
       this.CantMoveCloser = true;
     else 
       this.CantMoveCloser = false;

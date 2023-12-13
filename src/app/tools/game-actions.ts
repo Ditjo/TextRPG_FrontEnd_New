@@ -6,13 +6,10 @@ import { DiceRollInterval } from "./diceroller";
 
 export class GameActions{
 
-    //Define Variables
-
     DefendsEnergyCost:number = 2;
     MoveEnergyCost:number = 2;
     RestEnergyReturn:number = 5;
     RestHealthReturn:number = 1;
-
 
     ActionAttack(attackWeapon:Weapon | undefined, attackEbs:EntityBaseSystem, defendEbs:EntityBaseSystem, defendArmour:Armour | null):void{
         if(attackEbs != null && defendEbs != null && attackWeapon != null){
