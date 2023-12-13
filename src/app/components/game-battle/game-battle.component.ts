@@ -243,7 +243,7 @@ ngOnInit(){
     if ( weapon == null || weapon == undefined)
       baseAttackCost = 2
     else
-      baseAttackCost = weapon.weaponType.energyCost
+      baseAttackCost = weapon.weaponType!.energyCost
 
     if (ebs.energy < baseAttackCost)
       this.CanAttack = true;

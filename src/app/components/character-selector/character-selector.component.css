@@ -14,17 +14,28 @@
 }
 
 .buttons{
-    background-color: beige;
-    border: 1px solid black;
-    border-radius: 10px;
+    float: left;
+    color: #baa;
     padding: 10px;
-    margin: 5px 10px;
+    margin: 10px 5px 0 0;
     cursor: pointer;
-    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 4px #7007;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: #200c;
     font-size: 20px;
+    font-family: "Lucida Handwriting", "Brush Script MT", cursive;
 }
 .buttons:hover{
-    filter: brightness(80%);
+    color: #fee;
+    font-weight: bold;
+    border: 4px #730;
+    border-style: solid;
+    background-color: #620;
+    transition-duration: 0.3s;
 }
 
 a{
