@@ -82,9 +82,46 @@
     transition-duration: 0.3s;
 }
 
+#save-btn:hover
+{
+    color: #fee;
+    font-weight: bold;
+    border: 4px #370;
+    border-style: solid;
+    background-color: #260;
+    transition-duration: 0.3s;
+}
+
 .form-container
 {
     padding-left: 60px;
+}
+
+.item-form
+{
+    color: #300;
+    font-weight: bold;
+    /* background-color: #fff7; */
+    font-family: "Lucida Handwriting", "Brush Script MT", cursive;
+}
+
+.item-form input, select
+{
+    padding: 3px;
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: #edd;
+}
+
+.check
+{
+    background-color: #fee7;
+}
+
+.user-inputs
+{
+    display: flex;
+    flex-direction: column;
 }
 
 .ul-bottom

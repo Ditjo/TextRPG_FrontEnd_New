@@ -13,13 +13,13 @@ export class GameActions{
 
     ActionAttack(attackWeapon:Weapon | undefined, attackEbs:EntityBaseSystem, defendEbs:EntityBaseSystem, defendArmour:Armour | null):void{
         if(attackEbs != null && defendEbs != null && attackWeapon != null){
-          attackEbs.energy -= attackWeapon?.weaponType.energyCost
-          console.log('Energy Cost: ' + attackWeapon?.weaponType.energyCost);
+          attackEbs.energy -= attackWeapon?.weaponType!.energyCost
+          console.log('Energy Cost: ' + attackWeapon?.weaponType!.energyCost);
           
           if(attackEbs.strength > DiceRollInterval(1,20)){
             let totalDamage;
             if (attackWeapon != null){
-              totalDamage = DiceRollInterval(1,attackWeapon.weaponType?.damageDice) + attackWeapon.weaponDamageModifier + attackEbs.damageModifier;
+              totalDamage = DiceRollInterval(1,attackWeapon.weaponType?.damageDice!) + attackWeapon.weaponDamageModifier + attackEbs.damageModifier;
               // console.log(attackEbs);
               // console.log(attackEbs.damageModifier);
             }

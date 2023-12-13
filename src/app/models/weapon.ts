@@ -13,6 +13,6 @@ export interface Weapon extends baseId
     value: number;
     note: string | null;
 
-    weaponType: WeaponType;
+    weaponType: WeaponType | null;
     inventories: Inventory[] | null;
 }

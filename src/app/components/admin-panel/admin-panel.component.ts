@@ -7,8 +7,9 @@ import { TableURL } from '../../tools/table-url'
 import { Race } from '../../models/race';
 import { Career } from '../../models/career';
 import { Weapon } from '../../models/weapon';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormControlName, FormGroup } from '@angular/forms';
 import { first, firstValueFrom, timeout } from 'rxjs';
+import { WeaponType } from '../../models/weaponType';
 
 @Component({
   selector: 'app-admin-panel',
@@ -22,12 +23,14 @@ export class AdminPanelComponent
   constructor(
     private raceService:GenericService<Race>,
     private careerService:GenericService<Career>,
-    private weaponService:GenericService<Weapon>
+    private weaponService:GenericService<Weapon>,
+    private weaponTypeService:GenericService<WeaponType>
     ){}
     
     careerlist:Career[] = [];
     racelist:Race[] = [];
     weaponlist:Weapon[] = [];
+    weaponTypeList:WeaponType[] = [];
     
     selectedCareer?:Career;
     selectedRace?:Race;
@@ -41,6 +44,7 @@ export class AdminPanelComponent
     this.GetAllRace();
     this.GetAllCareer();
     this.GetAllWeapon();
+    this.GetAllWeaponType();
   }
 
   GetAllCareer(){
@@ -66,6 +70,14 @@ export class AdminPanelComponent
       }
     )
   }
+
+  GetAllWeaponType(){
+    this.weaponTypeService.getAll(TableURL.WeaponType).subscribe(
+      (data) => {
+        this.weaponTypeList = data;
+      }
+    )
+  }
   
   createNewCareer = new FormGroup
   ({
@@ -79,7 +91,16 @@ export class AdminPanelComponent
 
   createNewWeapon = new FormGroup
   ({
-    weaponName: new FormControl("")
+    // weaponTypeId: new FormControl(),
+    weaponName: new FormControl(""),
+    weaponDamageModifier: new FormControl(),
+    skillRoll: new FormControl(),
+    availableToHero: new FormControl(false),
+    starterWeapon: new FormControl(false),
+    value: new FormControl(),
+    note: new FormControl(""),
+
+    weaponType: new FormControl(this.weaponTypeList[0])
   })
 
   SelectCareer(career:Career): void
@@ -107,7 +128,16 @@ export class AdminPanelComponent
     this.selectedWeapon = weapon;
     console.log(this.selectedWeapon)
     this.createNewWeapon.patchValue({
-      weaponName: this.selectedWeapon.weaponName
+      // weaponTypeId: this.selectedWeapon.weaponTypeId,
+      weaponName: this.selectedWeapon.weaponName,
+      weaponDamageModifier: this.selectedWeapon.weaponDamageModifier,
+      skillRoll: this.selectedWeapon.skillRoll,
+      availableToHero: this.selectedWeapon.availableToHero,
+      starterWeapon: this.selectedWeapon.starterWeapon,
+      value: this.selectedWeapon.value,
+      note: this.selectedWeapon.note,
+
+      weaponType: this.selectedWeapon.weaponType
     })
     this.createNewWeapon.disable();
   }
@@ -116,18 +146,24 @@ export class AdminPanelComponent
   {
     this.showList = TableURL.Career;
     console.log(this.showList)
+    this.createNewCareer.reset();
+    this.IsSaveable = false;
   }
 
   Race(): void
   {
     this.showList = TableURL.Race;
     console.log(this.showList)
+    this.createNewRace.reset();
+    this.IsSaveable = false;
   }
 
   Weapon(): void
   {
     this.showList = TableURL.Weapon;
     console.log(this.showList)
+    this.createNewWeapon.reset();
+    this.IsSaveable = false;
   }
 
   Create(): void
@@ -136,7 +172,8 @@ export class AdminPanelComponent
     if (this.showList == TableURL.Career)
     {
       let newCareer: Career = {
-        id: 0, careerType: this.createNewCareer.value.careerName as unknown as string
+        id: 0,
+        careerType: this.createNewCareer.value.careerName as unknown as string
       }
       console.log(newCareer)
 
@@ -152,7 +189,8 @@ export class AdminPanelComponent
     if (this.showList == TableURL.Race)
     {
       let newRace: Race = {
-        id: 0, raceType: this.createNewRace.value.raceName as unknown as string
+        id: 0,
+        raceType: this.createNewRace.value.raceName as unknown as string
       }
       console.log(newRace)
 
@@ -165,20 +203,54 @@ export class AdminPanelComponent
     }
 
     // Weapon
-    // if (this.showList == TableURL.Weapon)
-    // {
-    //   let newWeapon: Weapon = {
-    //     id: 0, weaponName: this.createNewWeapon.value.weaponName as unknown as string
-    //   }
-    //   console.log(newWeapon)
+    if (this.showList == TableURL.Weapon)
+    {
+      let available: boolean;
+      let starter: boolean;
+      if (this.createNewWeapon.value.availableToHero == true)
+      {
+        available = this.createNewWeapon.value.availableToHero
+      }
+      else
+      {
+        available = false
+      }
 
-    //   this.weaponService.create(TableURL.Weapon, newWeapon).subscribe(
-    //     () => {
-    //       this.GetAllWeapon();
-    //     }
-    //   )
-    //   this.createNewWeapon.reset();
-    // }
+      if (this.createNewWeapon.value.starterWeapon == true)
+      {
+        starter = this.createNewWeapon.value.starterWeapon
+      }
+      else
+      {
+        starter = false
+      }
+
+      let newWeapon: Weapon = {
+        id: 0,
+        weaponTypeId: this.createNewWeapon.value.weaponType?.id!,
+        weaponName: this.createNewWeapon.value.weaponName!,
+        weaponDamageModifier: this.createNewWeapon.value.weaponDamageModifier,
+        skillRoll: this.createNewWeapon.value.skillRoll,
+
+        availableToHero: available,
+        starterWeapon: starter,
+
+        value: this.createNewWeapon.value.value,
+        note: this.createNewWeapon.value.note!,
+
+        // weaponType: this.createNewWeapon.value.weaponType as unknown as WeaponType,
+        weaponType: null,
+        inventories: null
+      }
+      console.log(newWeapon)
+
+      this.weaponService.create(TableURL.Weapon, newWeapon).subscribe(
+        () => {
+          this.GetAllWeapon();
+        }
+      )
+      this.createNewWeapon.reset();
+    }
   }
 
   Update(): void
@@ -190,7 +262,6 @@ export class AdminPanelComponent
       this.createNewRace.enable();
     
     this.IsSaveable = true;
-    console.log("Edit pressed")
   }
 
   async SaveEdit()
