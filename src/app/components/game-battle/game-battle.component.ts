@@ -253,8 +253,8 @@ ngOnInit(){
       baseWeaponRange = 0
     }
     else{
-      baseAttackCost = weapon.weaponType.energyCost
-      baseWeaponRange = weapon.weaponType.range
+      baseAttackCost = weapon.weaponType!.energyCost
+      baseWeaponRange = weapon.weaponType!.range
     }
 
     if (ebs.energy < baseAttackCost || 
