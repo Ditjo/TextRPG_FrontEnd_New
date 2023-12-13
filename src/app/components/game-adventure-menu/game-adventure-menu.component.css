@@ -3,9 +3,11 @@
     flex-direction: column;
     height: 100%;
 }
+
 .gameview{
     flex:1;
 }
+
 .menu{ 
     display: flex;
     height: auto;
