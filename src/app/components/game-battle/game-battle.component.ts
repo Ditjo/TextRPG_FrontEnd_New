@@ -168,7 +168,7 @@ ngOnInit(){
     this.FreeActionSwitchWeapon();
     this.BattleLoop()
   }
-  Flea():void{
+  Flee():void{
     console.log('Hero Flees');
     this.router.navigate(["../adventure-menu"], {relativeTo: this.route, state: { input: this.staticHero}})
   }
