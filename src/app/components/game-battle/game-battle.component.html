@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="distance">
-                1
+                <div>{{distance.distance}}</div>
             </div>
             <div class="herobar">
                 <h4>{{staticHero.heroName}}</h4>
@@ -42,10 +42,10 @@
     </div>
     <div class="menu">
         <!-- <button class="menubtn" (click)="Return()">Return</button> -->
-        <button class="menubtn" (click)="Attack()" [disabled]="CanAttack">Attack</button>
-        <button class="menubtn" (click)="Defend()" [disabled]="CanDefend">Defend</button>
-        <button class="menubtn" (click)="MoveCloser()" [disabled]="CanMoveCloser">Move Closer</button>
-        <button class="menubtn" (click)="MoveAway()" [disabled]="CanMoveAway">Move Away</button>
+        <button class="menubtn" (click)="Attack()" [disabled]="CantAttack">Attack</button>
+        <button class="menubtn" (click)="Defend()" [disabled]="CantDefend">Defend</button>
+        <button class="menubtn" (click)="MoveCloser()" [disabled]="CantMoveCloser">Move Closer</button>
+        <button class="menubtn" (click)="MoveAway()" [disabled]="CantMoveAway">Move Away</button>
         <button class="menubtn" (click)="Rest()">Rest</button>
         <button class="menubtn" (click)="UseItem()">Use Item</button>
         <button class="menubtn" (click)="SwitchWeapon()">Switch Weapon</button>
