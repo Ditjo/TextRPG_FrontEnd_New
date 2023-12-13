@@ -36,29 +36,44 @@
         </div>
 
         <div class="form-container">
-            <div class="career-form" *ngIf="showList == 'Career/'">
+            <div class="item-form" *ngIf="showList == 'Career/'">
                 <form [formGroup]="createNewCareer">
-                    <div class="career-container">
+                    <div class="user-inputs">
                         <input id="careeName" type="text" formControlName="careerName" placeholder="Career :">
                     </div>
                 </form>
             </div>
-            <div class="race-form" *ngIf="showList == 'Race/'">
+            <div class="item-form" *ngIf="showList == 'Race/'">
                 <form [formGroup]="createNewRace">
-                    <div class="race-container">
+                    <div class="user-inputs">
                         <input id="raceName" type="text" formControlName="raceName" placeholder="Race :">
                     </div>
                 </form>
             </div>
-            <div class="race-form" *ngIf="showList == 'Weapon/'">
+            <div class="item-form" *ngIf="showList == 'Weapon/'">
                 <form [formGroup]="createNewWeapon">
-                    <div class="weapon-form" *ngIf="showList == 'Weapon/'">
+                    <div class="user-inputs" *ngIf="showList == 'Weapon/'">
                         <input id="weaponName" type="text" formControlName="weaponName" placeholder="Weapon :">
+                        <input id="weaponDamageModifier" type="number" formControlName="weaponDamageModifier" placeholder="Damage Modifier :">
+                        <input id="skillRoll" type="number" formControlName="skillRoll" placeholder="skill Roll :">
+                        <input id="value" type="number" formControlName="value" placeholder="value :">
+                        <input id="note" type="text" formControlName="note" placeholder="note :">
+                        <label class="check">Available To Hero
+                            <input type="checkbox" formControlName="availableToHero">
+                        </label>
+                        <label class="check">Starter Weapon
+                            <input type="checkbox" formControlName="starterWeapon">
+                        </label>
+                        <select formControlName="weaponType">
+                            <option *ngFor="let weaponType of weaponTypeList" [ngValue]="weaponType">
+                                {{weaponType.weaponTypeName}}</option>
+                        </select>
                     </div>
                 </form>
             </div>
             <div *ngIf="IsSaveable">
-                <button class="save-btn" (click)="SaveEdit()">Save changes</button>
+                <br>
+                <button id="save-btn" class="item-buttons" (click)="SaveEdit()">Save changes</button>
             </div>
         </div>
     </div>
