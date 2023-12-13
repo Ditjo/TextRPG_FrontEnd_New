@@ -248,7 +248,7 @@ ngOnInit(){
     let baseWeaponRange: number
 
     //Can Attack
-    if ( weapon == null || weapon == undefined){
+    if ( weapon == null || weapon == undefined || weapon.weaponType == null){
       baseAttackCost = 2
       baseWeaponRange = 0
     }
