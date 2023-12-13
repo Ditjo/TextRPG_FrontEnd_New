@@ -11,6 +11,7 @@ import { Inventory } from '../../models/inventory';
 import { Armour } from '../../models/armour';
 import { GameActions } from '../../tools/game-actions';
 import { ResetEntity } from '../../tools/reset-fighters';
+import { distance } from '../../models/distance';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { ResetEntity } from '../../tools/reset-fighters';
   templateUrl: './game-battle.component.html',
   styleUrl: './game-battle.component.css'
 })
+
 export class GameBattleComponent {
 
   constructor(
@@ -31,6 +33,7 @@ export class GameBattleComponent {
     this.gameAction = new GameActions
   }
   public gameAction:GameActions
+  
 ngOnInit(){
   // const gameAction = new GameActions
   // this.gameAction = new GameActions
@@ -44,12 +47,15 @@ ngOnInit(){
   monsterSelectedWeapon!:Weapon | undefined
   monstersTurn:boolean = false
   turns:number = 2
+  distance:distance = {distance:1}
 
-  CanAttack:boolean = false;
-  CanDefend:boolean = false;
-  CanMoveCloser:boolean = false;
-  CanMoveAway:boolean = false;
-  CanFlea:boolean = false;
+
+
+  CantAttack:boolean = false;
+  CantDefend:boolean = false;
+  CantMoveCloser:boolean = false;
+  CantMoveAway:boolean = false;
+  CantFlea:boolean = false;
 
   GetAMonsterToFight():void{
     this.monsterService.getAll(TableURL.Monster).subscribe(
@@ -103,11 +109,11 @@ ngOnInit(){
       this.monstersTurn = false
       //Reset Dynamic Hero
       ResetEntity(this.dynamicHero.entityBaseSystem,this.staticHero.entityBaseSystem)
-      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon)
+      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon, this.distance)
     }
     else{
       this.monstersTurn = true;
-      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon)
+      this.CanAction(this.dynamicHero.entityBaseSystem,this.heroSelectedWeapon, this.distance)
     }
   }
 
@@ -142,10 +148,12 @@ ngOnInit(){
   }
   MoveCloser():void{
     console.log('Hero Moves Closer');
+    this.gameAction.ActionMoveCloser(this.distance)
     this.BattleLoop()
   }
   MoveAway():void{
     console.log('Hero Moves Away');
+    this.gameAction.ActionMoveAway(this.distance)
     this.BattleLoop()
   }
   Rest():void{
@@ -236,34 +244,46 @@ ngOnInit(){
   //   dynamicEbs.healthModifier = staticEbs.healthModifier
   // }
 
-  CanAction(ebs:EntityBaseSystem, weapon:Weapon | undefined):void{
+  CanAction(ebs:EntityBaseSystem, weapon:Weapon | undefined, distance:distance):void{
 
     let baseAttackCost:number
+    let baseWeaponRange: number
 
-    if ( weapon == null || weapon == undefined)
+    //Can Attack
+    if ( weapon == null || weapon == undefined){
       baseAttackCost = 2
-    else
+      baseWeaponRange = 0
+    }
+    else{
       baseAttackCost = weapon.weaponType.energyCost
+      baseWeaponRange = weapon.weaponType.range
+    }
 
-    if (ebs.energy < baseAttackCost)
-      this.CanAttack = true;
+    if (ebs.energy < baseAttackCost && 
+        baseWeaponRange >= distance.distance)
+      this.CantAttack = true;
     else
-      this.CanAttack = false;
+      this.CantAttack = false;
 
+    //Can Defend
     if (ebs.energy < this.gameAction.DefendsEnergyCost)
-      this.CanDefend = true;
+      this.CantDefend = true;
     else
-      this.CanDefend = false;
+      this.CantDefend = false;
 
-    if (ebs.energy < this.gameAction.MoveEnergyCost)
-      this.CanMoveAway = true;
+    //Can MoveAway
+    if (ebs.energy < this.gameAction.MoveEnergyCost &&
+        distance.distance < 3)
+      this.CantMoveAway = true;
     else 
-      this.CanMoveAway = false;
+      this.CantMoveAway = false;
 
-      if (ebs.energy < this.gameAction.MoveEnergyCost)
-      this.CanMoveCloser = true;
+    //Can MoveCloser
+    if (ebs.energy < this.gameAction.MoveEnergyCost &&
+        distance.distance > 0)
+      this.CantMoveCloser = true;
     else 
-      this.CanMoveCloser = false;
+      this.CantMoveCloser = false;
   }
 
 }

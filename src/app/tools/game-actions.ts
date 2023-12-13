@@ -1,4 +1,5 @@
 import { Armour } from "../models/armour";
+import { distance } from "../models/distance";
 import { EntityBaseSystem } from "../models/entityBaseSystem";
 import { Weapon } from "../models/weapon";
 import { DiceRollInterval } from "./diceroller";
@@ -61,11 +62,13 @@ export class GameActions{
         
       }
 
-      ActionMoveCloser():void{
+      ActionMoveCloser(distance:distance):void{
+        distance.distance -= 1;
         console.log('Hero Moves Closer');
       }
 
-      ActionMoveAway():void{
+      ActionMoveAway(distance:distance):void{
+        distance.distance += 1;
         console.log('Hero Moves Away');
       }
 
